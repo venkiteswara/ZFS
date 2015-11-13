@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/fusepy.iml" filepath="$PROJECT_DIR$/.idea/fusepy.iml" />
+=======
+      <module fileurl="file://$USER_HOME$/PycharmProjects/ZFS/.idea/untitled.iml" filepath="$USER_HOME$/PycharmProjects/ZFS/.idea/untitled.iml" />
+>>>>>>> c0e93e32886f3abe90ebc997e00ded530ad47c45
     </modules>
   </component>
 </project>

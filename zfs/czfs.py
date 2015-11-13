@@ -8,7 +8,7 @@ import errno
 
 from fuse import FUSE, FuseOSError, Operations
 
-class MyFS(Operations):
+class ZFS(Operations):
     def __init__(self, root):
         self.root = root
 
@@ -23,22 +23,6 @@ class MyFS(Operations):
 
     # Filesystem methods
     # ==================
-
-    def access(self, path, mode):
-        print "ACCESS: ", path, mode
-        full_path = self._full_path(path)
-        if not os.access(full_path, mode):
-            raise FuseOSError(errno.EACCES)
-
-    def getattr(self, path, fh=None):
-        print "GETATTR: ", path
-        full_path = self._full_path(path)
-        st = os.lstat(full_path)
-        return dict((key, getattr(st, key)) for key in ('st_atime', 'st_ctime', 'st_gid', 'st_mode', 'st_mtime', 'st_nlink', 'st_size', 'st_uid'))
-
-    def mkdir(self, path, mode):
-        print "MKDIR: ", path, mode
-        return os.mkdir(self._full_path(path), mode)
 
     def readdir(self, path, fh):
         full_path = self._full_path(path)
@@ -82,13 +66,28 @@ class MyFS(Operations):
     def mknod(self, path, mode, dev):
         return os.mknod(self._full_path(path), mode, dev)
 
+    def create(self, path, mode, fi=None):
+        full_path = self._full_path(path)
+        return os.open(full_path, os.O_WRONLY | os.O_CREAT, mode)
+
     def rmdir(self, path):
         full_path = self._full_path(path)
-        return os.rmdir(full_path)
+        ret =  os.rmdir(full_path)
+        print ret
+        return ret
 
     def mkdir(self, path, mode):
         print path, " : Hi"
-        return os.mkdir(self._full_path(path), mode)
+        ret =  os.mkdir(self._full_path(path), mode)
+        print ret
+        return ret
+
+    def getattr(self, path, fh=None):
+        #print "GETATTR: ", path
+        full_path = self._full_path(path)
+        st = os.lstat(full_path)
+        ret =  dict((key, getattr(st, key)) for key in ('st_ino', 'st_dev', 'st_atime', 'st_ctime', 'st_gid', 'st_mode', 'st_mtime', 'st_nlink', 'st_size', 'st_uid'))
+        return ret
 
     def statfs(self, path):
         full_path = self._full_path(path)
@@ -119,10 +118,6 @@ class MyFS(Operations):
         full_path = self._full_path(path)
         return os.open(full_path, flags)
 
-    def create(self, path, mode, fi=None):
-        full_path = self._full_path(path)
-        return os.open(full_path, os.O_WRONLY | os.O_CREAT, mode)
-
     def read(self, path, length, offset, fh):
         os.lseek(fh, offset, os.SEEK_SET)
         return os.read(fh, length)
@@ -146,7 +141,7 @@ class MyFS(Operations):
         return self.flush(path, fh)
 
 def main(clientLoc, serverLoc):
-    FUSE(MyFS(serverLoc), clientLoc, nothreads=True, foreground=True)
+    FUSE(ZFS(serverLoc), clientLoc, nothreads=True, foreground=True)
 
 if __name__ == '__main__':
     mntPoint = "/home/adi/Projects/zfs"

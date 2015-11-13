@@ -2,12 +2,8 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
+    <content url="file://$USER_HOME$/fusepy" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="grpc" />
-    <orderEntry type="module" module-name="grpcPython" />
-    <orderEntry type="module" module-name="grpcPython" />
-    <orderEntry type="module" module-name="grpcPython" />
-    <orderEntry type="module" module-name="grpcPython" />
   </component>
 </module>

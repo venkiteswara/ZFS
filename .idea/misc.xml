@@ -10,5 +10,9 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 2.7.9 (/usr/bin/python2.7)" project-jdk-type="Python SDK" />
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 2.7.10 (~/anaconda/bin/python)" project-jdk-type="Python SDK" />
+>>>>>>> c0e93e32886f3abe90ebc997e00ded530ad47c45
 </project>
